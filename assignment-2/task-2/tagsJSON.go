@@ -12,12 +12,6 @@ type MSDSCourse struct {
 	CPREREQ string `json:"prerequisite,omitempty"`
 }
 
-// {CID: "MSDS-400", CNAME: "Math for Modelers", CPREREQ: ""},
-// {CID: "MSDS-422", CNAME: "Practical Machine Learning", CPREREQ: "MSDS-430"},
-// {CID: "MSDS-432", CNAME: "Foundations of Data Engineering", CPREREQ: "MSDS-420"},
-// {CID: "MSDS-460", CNAME: "Decision Analytics", CPREREQ: "MSDS-400"},
-// {CID: "MSDS-498", CNAME: "AI Capstone Project", CPREREQ: "MSDS-458"},
-
 func main() {
 
 	// Array of courses
