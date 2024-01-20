@@ -114,7 +114,7 @@ func main() {
 	// Create sample data
 	var i int
 	var t Data
-	for i = 0; i < 100000; i++ {
+	for i = 0; i < 1000000; i++ {
 		t = Data{
 			Key: getString(5),
 			Val: random(1, 100),
