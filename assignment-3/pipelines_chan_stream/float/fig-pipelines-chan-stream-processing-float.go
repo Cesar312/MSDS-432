@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 func main() {
-	generator := func(done <-chan interface{}, integers ...int) <-chan int {
-		intStream := make(chan int)
+	generator := func(done <-chan interface{}, integers ...float64) <-chan float64 {
+		intStream := make(chan float64)
 		go func() {
 			defer close(intStream)
 			for _, i := range integers {
@@ -22,10 +24,10 @@ func main() {
 
 	multiply := func(
 		done <-chan interface{},
-		intStream <-chan int,
-		multiplier int,
-	) <-chan int {
-		multipliedStream := make(chan int)
+		intStream <-chan float64,
+		multiplier float64,
+	) <-chan float64 {
+		multipliedStream := make(chan float64)
 		go func() {
 			defer close(multipliedStream)
 			for i := range intStream {
@@ -41,10 +43,10 @@ func main() {
 
 	add := func(
 		done <-chan interface{},
-		intStream <-chan int,
-		additive int,
-	) <-chan int {
-		addedStream := make(chan int)
+		intStream <-chan float64,
+		additive float64,
+	) <-chan float64 {
+		addedStream := make(chan float64)
 		go func() {
 			defer close(addedStream)
 			for i := range intStream {
@@ -61,10 +63,24 @@ func main() {
 	done := make(chan interface{})
 	defer close(done)
 
-	intStream := generator(done, 1, 2, 3, 4)
+	n := 1000000
+
+	// Generate a slice of random integers
+	var ints []float64
+	for i := 1; i < n; i++ {
+		ints = append(ints, rand.Float64()*float64(n))
+	}
+
+	intStream := generator(done, ints...)
+
+	// Measure the time taken to multiply and add
+	start := time.Now()
 	pipeline := multiply(done, add(done, multiply(done, intStream, 2), 1), 2)
+	elapsed := time.Since(start)
 
 	for v := range pipeline {
 		fmt.Println(v)
 	}
+
+	fmt.Printf("Time taken: %s\n", elapsed)
 }
