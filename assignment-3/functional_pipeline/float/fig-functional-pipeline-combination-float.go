@@ -29,7 +29,7 @@ func main() {
 	// Generate a slice of n random float64 numbers
 	floats := make([]float64, n)
 	for i := range floats {
-		// Generate random float64number between 0 and 1,  then scale up to n
+		// Generate random float64number between 0 and 1, then scale up to n
 		floats[i] = rand.Float64() * float64(n)
 	}
 
