@@ -76,6 +76,8 @@ func main() {
 		log.Fatal(".env file could not be loaded")
 	}
 
+	fmt.Println("Successfully loaded API key")
+
 	apiKey := os.Getenv("API_KEY")
 
 	// Open CSV dataset

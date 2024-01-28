@@ -24,7 +24,7 @@ func main() {
 		return addedValues
 	}
 
-	n := 1000000
+	n := 10000
 
 	// Generate a slice of n random float64 numbers
 	floats := make([]float64, n)

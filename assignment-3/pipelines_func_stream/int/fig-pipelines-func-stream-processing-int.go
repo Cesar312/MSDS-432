@@ -15,7 +15,7 @@ func main() {
 		return value + additive
 	}
 
-	n := 1000000
+	n := 10000
 
 	// Generate a slice of n random integers
 	ints := make([]int, n)

@@ -145,7 +145,8 @@ func main() {
 	// fmt.Println(apiKey)
 
 	// // open  csv dataset
-	dataset, err := os.Open("Traffic_Crashes_20240113.csv")
+	// dataset, err := os.Open("Traffic_Crashes_20240113.csv")
+	dataset, err := os.Open("Traffic_Crashes_Subset.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -186,7 +187,7 @@ func createCrashMap(data [][]string, apiKey string) map[string]CrashData {
 	// uncomment below line to process the entire data set
 	// for i := 1; i < len(data); i++ {
 	// uncomment below line to process 500 records only
-	for i := 1; i < 500; i++ {
+	for i := 1; i < 5; i++ {
 
 		// Initilze the list
 		var crashRecord CrashData
