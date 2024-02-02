@@ -63,7 +63,7 @@ func main() {
 	done := make(chan interface{})
 	defer close(done)
 
-	n := 10000
+	n := 1000000
 
 	// Generate a slice of random integers
 	var ints []float64
