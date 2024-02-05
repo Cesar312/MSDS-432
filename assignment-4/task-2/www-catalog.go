@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-
-	// "regexp"
 	"strconv"
 	"time"
 )
@@ -134,12 +132,6 @@ func search(CID string) *MSDSCourse {
 	data[i].LastAccess = strconv.FormatInt(time.Now().Unix(), 10)
 	return &data[i]
 }
-
-// func matchTel(s string) bool {
-// 	t := []byte(s)
-// 	re := regexp.MustCompile(`\d+$`)
-// 	return re.Match(t)
-// }
 
 func list() string {
 	var all string

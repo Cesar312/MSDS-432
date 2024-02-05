@@ -51,7 +51,7 @@ func insertHandler(w http.ResponseWriter, r *http.Request) {
 	// Split URL
 	paramStr := strings.Split(r.URL.Path, "/")
 	if len(paramStr) < 5 {
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusNotFound)
 		fmt.Fprintln(w, "Not enough arguments: "+r.URL.Path)
 		return
 	}
@@ -70,13 +70,13 @@ func insertHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := insert(course)
 	if err != nil {
-		w.WriteHeader(http.StatusConflict)
-		fmt.Println(w, "Failed to add course: ", err.Error())
+		w.WriteHeader(http.StatusNotModified)
+		fmt.Fprintln(w, "Failed to add course: ", err.Error())
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
-	fmt.Println(w, "Course %s added successfully.\n", course.CID)
+	fmt.Fprintln(w, "New record added successfully.\n", course.CID)
 }
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {
@@ -96,6 +96,6 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Not found: "+r.URL.Path)
 		return
 	} else {
-		fmt.Println(w, "%s %s %s\n", course.CID, course.CNAME, course.CPREREQ)
+		fmt.Fprintf(w, "%s %s %s\n", course.CID, course.CNAME, course.CPREREQ)
 	}
 }
