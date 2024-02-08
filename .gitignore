@@ -1,3 +1,6 @@
 .DS_Store
 .env
 .prof
+
+# Avoids uploading postgres directory
+asignment-5/postgres/
