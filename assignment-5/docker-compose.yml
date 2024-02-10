@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=master
     volumes:
-      - ./postgres:/var/lib/postgresql/data/
+      - ./postgres:/var/lib/postgresql/data_pg/
     networks:
       - psql
     ports:
