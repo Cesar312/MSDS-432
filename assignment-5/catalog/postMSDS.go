@@ -5,7 +5,7 @@ import (
 	// "math/rand"
 	//"time"
 
-	"github.com/mactsouk/post05"
+	"github.com/Cesar312/MSDS-432/assignment-5/catalog/post05-main/post05"
 )
 
 func main() {
