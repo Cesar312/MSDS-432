@@ -2,10 +2,8 @@ package main
 
 import (
 	"fmt"
-	// "math/rand"
-	//"time"
 
-	"github.com/Cesar312/MSDS-432/assignment-5/catalog/post05-main/post05"
+	"github.com/Cesar312/MSDS-432/assignment-5/catalog/post05-main"
 )
 
 func main() {
@@ -14,20 +12,6 @@ func main() {
 	post05.Username = "postgres"
 	post05.Password = "root"
 	post05.Database = "msds"
-
-	// data, err := post05.ListCourses()
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	return
-	// }
-
-	// for _, c := range data {
-	// 	fmt.Println(c)
-	// }
-
-	// // Seed for random generation
-	// SEED := time.Now().Unix()
-	// rand.Seed(SEED)
 
 	// Define and add MSDS courses
 	courses := []post05.MSDSCourse{
