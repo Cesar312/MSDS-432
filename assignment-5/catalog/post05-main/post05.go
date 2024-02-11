@@ -33,15 +33,41 @@ func openConnection() (*sql.DB, error) {
 	return db, nil
 }
 
+// The function checks if a CID exists in the database
+// Returns true if the course exists, false otherwise
+func exists(cid string) bool {
+	db, err := openConnection()
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	defer db.Close()
+
+	var exists bool
+	query := `SELECT EXISTS(SELECT 1 FROM msdsCourseCatalog WHERE CID=$1)`
+	err = db.QueryRow(query, cid).Scan(&exists)
+	if err != nil {
+		fmt.Println("QueryRow", err)
+		return false
+	}
+
+	return exists
+}
+
 // AddCourse adds a new course to the msdsCourseCatalog table
 func AddCourse(course MSDSCourse) error {
+	// Check if the course already exists
+	if exists(course.CID) {
+		return fmt.Errorf("course already exists with CID: %s", course.CID)
+	}
+
 	db, err := openConnection()
 	if err != nil {
 		return err
 	}
 	defer db.Close()
 
-	insertQuery := `INSERT INTO msdscoursecatalog (CID, CNAME, CPREREQ) VALUES ($1, $2, $3)`
+	insertQuery := `INSERT INTO msdsCourseCatalog (CID, CNAME, CPREREQ) VALUES ($1, $2, $3)`
 	_, err = db.Exec(insertQuery, course.CID, course.CNAME, course.CPREREQ)
 	if err != nil {
 		return err
